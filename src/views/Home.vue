@@ -2,18 +2,10 @@
   <div class="home">
     <!-- 导航栏 -->
     <div class="nav-bar">
-      <span class="nav-link active">Home</span> |
-      <span class="nav-link">About</span> |
-      <span class="nav-link" @click="goToLogin">Login</span>
+      <span class="nav-link active">首页</span> |
+      <span class="nav-link" @click="goToLogin">登录</span>
     </div>
 
-    <!-- 按钮区域 -->
-    <div class="button-area">
-      <el-button v-if="!isLogin" type="primary" @click="goToLogin">登录</el-button>
-      <el-button v-else @click="handleLogout">退出登录</el-button>
-    </div>
-
-    <!-- 状态显示 -->
     <div class="status-section">
       <div v-if="isLogin" class="status-box">
         <h3 class="status-title">状态1</h3>
@@ -22,8 +14,7 @@
 
       <div v-else class="status-box">
         <h3 class="status-title">状态2</h3>
-        <p>尚未登录，请前往登录页Login</p>
-        <p class="status-detail">(点击上方的 login 都可以跳转)</p>
+        <p>尚未登录，请登录</p>
       </div>
     </div>
   </div>
