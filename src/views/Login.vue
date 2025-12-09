@@ -1,34 +1,17 @@
 <template>
   <div class="login-page">
-    <!-- 导航栏 -->
+    <div class="welcome-section">
+      <h1 class="welcome-title">登录页面</h1>
+    </div>
+
     <div class="nav-bar">
       <span class="nav-link" @click="goToHome">首页</span> |
       <span class="nav-link active">登录</span>
     </div>
 
-    <!-- 按钮区域 -->
     <div class="button-area">
       <el-button v-if="isLogin" @click="handleLogout" type="danger">退出登录</el-button>
-      <el-button v-if="!isLogin" @click="showLoginForm" type="primary">显示登录表单</el-button>
-    </div>
-
-    <!-- 登录表单（仅在未登录且显示表单时显示） -->
-    <div v-if="!isLogin && showForm" class="login-container">
-      <div class="login-card">
-        <h2>登录</h2>
-        <el-form :model="form">
-          <el-form-item label="用户名">
-            <el-input v-model="form.username" placeholder="请输入用户名" />
-          </el-form-item>
-          <el-form-item label="密 码">
-            <el-input v-model="form.password" type="password" placeholder="请输入密码" />
-          </el-form-item>
-          <el-form-item class="button-group">
-            <el-button type="primary" @click="handleLogin" class="login-btn">登录</el-button>
-          </el-form-item>
-        </el-form>
-        <p class="tip">测试账号: user / password</p>
-      </div>
+      <el-button v-if="!isLogin" @click="handleLogin" type="primary">登录</el-button>
     </div>
   </div>
 </template>
@@ -46,7 +29,6 @@ export default {
     const router = useRouter()
 
     const isLogin = computed(() => store.getters.isLogin)
-    const showForm = ref(false)
 
     const form = reactive({
       username: 'user',
@@ -54,27 +36,13 @@ export default {
     })
 
     const handleLogin = () => {
-      if (!form.username || !form.password) {
-        ElMessage.warning('请输入用户名和密码')
-        return
-      }
-
-      if (form.username === 'user' && form.password === 'password') {
-        store.commit('login')
-        ElMessage.success('登录成功')
-        showForm.value = false
-      } else {
-        ElMessage.error('用户名或密码错误')
-      }
+      store.commit('login')
+      ElMessage.success('登录成功')
     }
 
     const handleLogout = () => {
       store.commit('logout')
       ElMessage.success('退出登录成功')
-    }
-
-    const showLoginForm = () => {
-      showForm.value = true
     }
 
     const goToHome = () => {
@@ -83,11 +51,9 @@ export default {
 
     return {
       form,
-      showForm,
       isLogin,
       handleLogin,
       handleLogout,
-      showLoginForm,
       goToHome
     }
   }
@@ -96,6 +62,11 @@ export default {
 
 <style scoped>
 .login-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
   padding: 20px;
   max-width: 600px;
   margin: 0 auto;
@@ -123,25 +94,6 @@ export default {
 .button-area {
   text-align: center;
   margin: 30px 0;
-}
-
-.status-section {
-  margin-top: 40px;
-  margin-bottom: 40px;
-}
-
-.status-box {
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-  text-align: center;
-}
-
-.status-title {
-  color: #ff6b35;
-  font-size: 18px;
-  margin-bottom: 15px;
 }
 
 .login-container {

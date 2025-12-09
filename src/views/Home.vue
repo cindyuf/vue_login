@@ -1,20 +1,28 @@
 <template>
   <div class="home">
-    <!-- 导航栏 -->
+
+    <div class="welcome-section">
+      <h1 class="welcome-title">首页页面</h1>
+    </div>
+
     <div class="nav-bar">
       <span class="nav-link active">首页</span> |
       <span class="nav-link" @click="goToLogin">登录</span>
     </div>
 
+    <div class="button-area">
+      <el-button v-if="!isLogin" type="primary" @click="goToLogin">前往登录</el-button>
+    </div>
+
     <div class="status-section">
-      <div v-if="isLogin" class="status-box">
-        <h3 class="status-title">状态1</h3>
-        <p>已经登录!</p>
+      <div v-if="isLogin" class="status-box success">
+        <h3 class="status-title">状态1 - 已登录</h3>
+        <p>欢迎回来！当前处于登录状态</p>
       </div>
 
-      <div v-else class="status-box">
-        <h3 class="status-title">状态2</h3>
-        <p>尚未登录，请登录</p>
+      <div v-else class="status-box warning">
+        <h3 class="status-title">状态2 - 未登录</h3>
+        <p>尚未登录，请先登录系统</p>
       </div>
     </div>
   </div>
@@ -52,6 +60,11 @@ export default {
 
 <style scoped>
 .home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
   padding: 20px;
   max-width: 600px;
   margin: 0 auto;
@@ -76,32 +89,74 @@ export default {
   text-decoration: underline;
 }
 
+.welcome-section {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.welcome-title {
+  color: #2c3e50;
+  font-size: 28px;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.welcome-desc {
+  color: #666;
+  font-size: 16px;
+  margin: 0;
+}
+
 .button-area {
   text-align: center;
-  margin: 30px 0;
+  margin: 20px 0;
+}
+
+.button-area .el-button {
+  min-width: 100px;
 }
 
 .status-section {
-  margin-top: 40px;
+  margin-top: 30px;
+  width: 100%;
+  max-width: 400px;
 }
 
 .status-box {
   background: white;
-  padding: 20px;
+  padding: 25px;
   border-radius: 8px;
   border: 1px solid #ddd;
   text-align: center;
 }
 
-.status-title {
-  color: #ff6b35;
-  font-size: 18px;
-  margin-bottom: 15px;
+.status-box.success {
+  border-color: #67c23a;
+  background: #f0f9ff;
 }
 
-.status-detail {
+.status-box.warning {
+  border-color: #e6a23c;
+  background: #fdf6ec;
+}
+
+.status-title {
+  font-size: 18px;
+  margin-bottom: 15px;
+  font-weight: 500;
+}
+
+.status-box.success .status-title {
+  color: #67c23a;
+}
+
+.status-box.warning .status-title {
+  color: #e6a23c;
+}
+
+.status-box p {
   color: #666;
-  font-size: 12px;
-  margin-top: 10px;
+  margin: 0;
+  font-size: 14px;
 }
 </style>

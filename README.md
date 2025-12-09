@@ -15,20 +15,19 @@ npm install
 npm run dev
 ```
 
-## 登录信息
-- 用户名：user
-- 密码：password
-
 ## 项目截图
 
-### 未登录状态
-![未登录状态](./static/unlogin_status.png)
+### 首页 - 未登录状态
+![首页未登录状态](./static/home_page_not_activate.png)
 
-### 登录页面
-![登录页面](./static/login_page.png)
+### 首页 - 已登录状态
+![首页已登录状态](./static/home_page_activate.png)
 
-### 已登录状态
-![已登录状态](./static/login_status.png)
+### 登录页 - 未登录状态
+![登录页面未登录状态](./static/login_page_not_activate.png)
+
+### 登录页 - 已登录状态
+![登录页面已登录状态](./static/login_page_activate.png)
 
 
 
